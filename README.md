@@ -33,17 +33,16 @@ A Django-based blog application that allows users to submit posts and comment on
 ### ✅ Home Page (Post List)
 ![Home Page](screenshots/home.png)
 
-### 📝 Submit Post
-![Submit Post](screenshots/submit_post.png)
+### 📝 Login Page
+![Login Page](screenshots/login.png)
 
-### 🔐 Login Page
-![Login](screenshots/login.png)
+### 🔐 Register Page
+![Register](screenshots/register.png)
 
 ### 🧑‍💼 Admin Panel (Approve/Reject)
-![Admin Panel](screenshots/admin_panel.png)
+![Admin Panel](screenshots/post_approval.png)
 
-### 💬 Comment Section
-![Comment](screenshots/comment.png)
+
 
 ## 📦 Project Structure
 
