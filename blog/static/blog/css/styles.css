@@ -1,0 +1,46 @@
+/* Custom styles */
+body {
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    margin-bottom: 30px;
+}
+
+.card {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #343a40;
+    color: white;
+    border-radius: 10px 10px 0 0 !important;
+}
+
+.list-group-item {
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+textarea.form-control {
+    min-height: 150px;
+}
+
+/* Status badges */
+.status-approved {
+    color: #28a745;
+}
+
+.status-pending {
+    color: #ffc107;
+}
+
+.status-rejected {
+    color: #dc3545;
+}
+
+.status-draft {
+    color: #6c757d;
+}

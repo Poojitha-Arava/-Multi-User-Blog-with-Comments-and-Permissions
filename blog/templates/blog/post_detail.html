@@ -1,0 +1,62 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="card mb-4">
+        <div class="card-body">
+            <h1 class="card-title">{{ post.title }}</h1>
+            <p class="card-text text-muted">
+                Posted by {{ post.author.username }} on {{ post.created_at|date:"F d, Y" }}
+                {% if post.updated_at != post.created_at %}
+                    (updated on {{ post.updated_at|date:"F d, Y" }})
+                {% endif %}
+            </p>
+            <div class="card-text mb-4">{{ post.content|linebreaks }}</div>
+            
+            {% if user == post.author %}
+                <div class="btn-group">
+                    <a href="{% url 'post-update' post.pk %}" class="btn btn-outline-primary">
+                        <i class="bi bi-pencil"></i> Edit
+                    </a>
+                    <a href="{% url 'post-delete' post.pk %}" class="btn btn-outline-danger">
+                        <i class="bi bi-trash"></i> Delete
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3>Comments ({{ comments.count }})</h3>
+        </div>
+        <div class="card-body">
+            {% if comments %}
+                {% for comment in comments %}
+                    <div class="mb-3 pb-3 border-bottom">
+                        <div class="d-flex justify-content-between">
+                            <strong>{{ comment.user.username }}</strong>
+                            <small class="text-muted">{{ comment.created_at|date:"F d, Y H:i" }}</small>
+                        </div>
+                        <p>{{ comment.content }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No comments yet.</p>
+            {% endif %}
+            
+            {% if user.is_authenticated %}
+                <h4 class="mt-4">Add a comment</h4>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.content }}
+                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                </form>
+            {% else %}
+                <div class="alert alert-info">
+                    Please <a href="{% url 'login' %}">login</a> to leave a comment.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

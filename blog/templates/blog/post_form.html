@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h2>{% if post %}Edit Post{% else %}Create New Post{% endif %}</h2>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary me-2" name="save">
+                        {% if post %}Update{% else %}Create{% endif %}
+                    </button>
+                    
+                    {% if not post or post.status == 'draft' or post.status == 'rejected' %}
+                        <button type="submit" class="btn btn-success me-2" name="submit_for_review">
+                            Submit for Review
+                        </button>
+                    {% endif %}
+                    
+                    <a href="{% if post %}{% url 'post-detail' post.pk %}{% else %}{% url 'post-list' %}{% endif %}" 
+                       class="btn btn-outline-secondary">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

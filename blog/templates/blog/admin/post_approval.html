@@ -1,0 +1,37 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1 class="mb-4">Post Approval</h1>
+    
+    {% if pending_posts %}
+        <div class="list-group">
+            {% for post in pending_posts %}
+                <div class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ post.title }}</h5>
+                        <small>Submitted by {{ post.author.username }} on {{ post.created_at|date:"F d, Y" }}</small>
+                    </div>
+                    <p class="mb-1">{{ post.content|truncatewords:30 }}</p>
+                    
+                    <div class="mt-3">
+                        <a href="{% url 'approve-post' post.pk %}" class="btn btn-sm btn-success me-1">
+                            <i class="bi bi-check-circle"></i> Approve
+                        </a>
+                        <a href="{% url 'reject-post' post.pk %}" class="btn btn-sm btn-warning me-1">
+                            <i class="bi bi-x-circle"></i> Reject
+                        </a>
+                        <a href="{% url 'admin-delete-post' post.pk %}" class="btn btn-sm btn-danger">
+                            <i class="bi bi-trash"></i> Delete
+                        </a>
+                        <a href="{% url 'post-detail' post.pk %}" class="btn btn-sm btn-outline-primary float-end">
+                            <i class="bi bi-eye"></i> View
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-success">No posts pending approval.</div>
+    {% endif %}
+{% endblock %}
