@@ -44,5 +44,5 @@ A Django-based blog application that allows users to submit posts and comment on
 
 
 
-## 📦 Project Structure
+
 
